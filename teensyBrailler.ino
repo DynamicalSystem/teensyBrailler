@@ -4,23 +4,29 @@
 
 #define LEFT_HANDED TRUE
 
-#define UP LOW          //Swap these if the buttons are pull down
-#define DOWN HIGH
-
 Bounce brailleCells[NUM_BUTTONS];
 
 void setup() {
   //We assume Pin 6 (teensy++ LED) is available via a 1K pullup
-  for (i = 0; i < NUM_BUTTONS; i = i + 1) {
+  for (int i = 0; i < NUM_BUTTONS; i = i + 1) {
     brailleCells[i] = Bounce();
     brailleCells[i].attach(i);
-    brailCells[i].interval(5);
+    brailleCells[i].interval(5);
     pinMode(i, INPUT_PULLUP);
   }
 }
 
 void loop() {
-  for (i = 0; i < NUM_BUTTONS; i = i + 1) {
+  String down = "Down : ";
+  String up = "Up   : ";
+  
+  for (int i = 0; i < NUM_BUTTONS; i = i + 1) {
     brailleCells[i].update();
+    if (brailleCells[i].fell()){
+      Keyboard.println(down + i);
+    }
+    if (brailleCells[i].rose()) {
+      Keyboard.println(up + i);
+    }
   }
 }
