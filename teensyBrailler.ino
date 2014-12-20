@@ -20,8 +20,7 @@ void setup() {
 }
 
 void loop() {
-  for (i=0; i< NUM_BUTTONS; i=i+1) {
+  for (i = 0; i < NUM_BUTTONS; i = i + 1) {
     brailleCells[i].update();
-    
-    
-    
+  }
+}
